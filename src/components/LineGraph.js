@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js';
 import PropTypes from 'prop-types';
 
+Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif";
+
 function LineGraph({ label, labels, data }) {
   const chartRef = useRef();
   useEffect(() => {
@@ -16,8 +18,14 @@ function LineGraph({ label, labels, data }) {
           {
             label,
             data,
+            fill: false,
+            borderColor: '#EC6E4C',
           },
         ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
       },
     });
   }, [data, labels, label]);

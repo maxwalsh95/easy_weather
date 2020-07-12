@@ -15,6 +15,7 @@ function DayButton({ timestamp, icon, children, onSelected }) {
     display: flex;
     flex-direction: column;
   `;
+
   return (
     <button css={button} type="button" onClick={() => onSelected(timestamp)}>
       <span>{day}</span>
