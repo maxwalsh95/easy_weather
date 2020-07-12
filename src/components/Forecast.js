@@ -53,6 +53,7 @@ function Forecast({ location, onDaySelected }) {
           time: new Date(day.dt * 1000).getTime(),
           temp: day.main.temp,
           icon: day.weather[0].icon,
+          wind: day.wind.speed,
         };
       });
 
