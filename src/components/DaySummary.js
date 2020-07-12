@@ -8,6 +8,12 @@ import PropTypes from 'prop-types';
 import LineGraph from './LineGraph';
 
 function DaySummary({ data }) {
+  const windAndClarityContainer = css`
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  `;
+
   const li = css`
     display: inline-flex;
     flex-direction: column;
@@ -25,6 +31,13 @@ function DaySummary({ data }) {
     margin-left: 10px;
   `;
 
+  const readingSummary = css`
+    display: flex;
+  `;
+
+  const tempHigh = css`
+    margin: 0 10px 0 0;
+  `;
   const tempReadings = data.map((day) => day.temp);
 
   const times = data.map((day) => {
@@ -40,7 +53,7 @@ function DaySummary({ data }) {
 
   return (
     <div>
-      <ul>
+      <ul css={windAndClarityContainer}>
         {data.map((day, index) => (
           <li css={li}>
             <div css={windContainer}>
@@ -55,8 +68,10 @@ function DaySummary({ data }) {
           </li>
         ))}
       </ul>
-      <p>High: {Math.max(...tempReadings)}&deg;C</p>
-      <p>Average: {averageTemp}&deg;C</p>
+      <div css={readingSummary}>
+        <span css={tempHigh}>High: {Math.max(...tempReadings)}&deg;C</span>
+        <span>Average: {averageTemp}&deg;C</span>
+      </div>
       <LineGraph label="Temperature" labels={times} data={tempReadings} />
     </div>
   );

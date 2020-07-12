@@ -8,6 +8,7 @@ import DaySummary from './DaySummary';
 
 export default function App() {
   const [location, setLocation] = useState('');
+  const [searchedLocation, setSearchedLocation] = useState('gibraltar');
   const [selectedDayData, setSelectedDayData] = useState([]);
 
   const forecastContainer = css`
@@ -24,10 +25,15 @@ export default function App() {
 
   useEffect(() => {
     setSelectedDayData([]);
-  }, [location]);
+  }, [searchedLocation]);
 
   const handleOnChange = (event) => {
     setLocation(event.target.value);
+  };
+
+  const handleOnKeyPress = (event) => {
+    if (event.key !== 'Enter') return;
+    setSearchedLocation(event.target.value);
   };
 
   const handleDaySelected = (data) => {
@@ -41,8 +47,9 @@ export default function App() {
         type="text"
         value={location}
         onChange={handleOnChange}
+        onKeyPress={handleOnKeyPress}
       />
-      <Forecast location={location} onDaySelected={handleDaySelected} />
+      <Forecast location={searchedLocation} onDaySelected={handleDaySelected} />
       {selectedDayData.length > 0 && <DaySummary data={selectedDayData} />}
     </div>
   );

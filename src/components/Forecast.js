@@ -14,6 +14,7 @@ function Forecast({ location, onDaySelected }) {
   const ul = () => css`
     padding: 0;
     display: flex;
+    flex-wrap: wrap;
   `;
 
   const li = () => css`
@@ -23,6 +24,7 @@ function Forecast({ location, onDaySelected }) {
   `;
 
   useEffect(() => {
+    setSelectedDay(null);
     const getForecast = async () => {
       setIsLoading(true);
       try {
@@ -75,6 +77,7 @@ function Forecast({ location, onDaySelected }) {
                 timestamp={day.dt}
                 icon={day.weather[0].icon}
                 onSelected={handleDaySelected}
+                selected={day.dt === selectedDay}
               >
                 {day.main.temp}
               </DayButton>
