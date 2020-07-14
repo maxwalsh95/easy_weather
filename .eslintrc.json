@@ -1,0 +1,11 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "extends": ["airbnb", "airbnb/hooks", "prettier", "prettier/react"],
+  "plugins": ["react"],
+  "rules": {
+    "react/jsx-filename-extension": "off"
+  }
+}

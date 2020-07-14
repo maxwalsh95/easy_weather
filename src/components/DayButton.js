@@ -42,7 +42,12 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
   return (
     <button css={button} type="button" onClick={() => onSelected(timestamp)}>
       <span>{day}</span>
-      <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
+      <img
+        width="100px"
+        height="100px"
+        src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+        alt=""
+      />
       <span>{Math.round(children)}&deg;C</span>
     </button>
   );

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { jsx, css } from '@emotion/core';
 import axios from 'axios';
 import DayButton from './DayButton';
+import fadeIn from '../utils/fadeIn.style';
 
 function Forecast({ location, onDaySelected }) {
   const [forecast, setForecast] = useState([]);
@@ -11,16 +12,19 @@ function Forecast({ location, onDaySelected }) {
   const [hasErrored, setHasErrored] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
 
-  const ul = () => css`
+  const ul = css`
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
+    width: 100%;
+    overflow: auto;
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 5px;
+    // justify-content: center;
+    ${fadeIn(1)}
   `;
 
   const li = () => css`
-    list-style-type: none;
     display: inline-block;
-    margin: 0 5px;
   `;
 
   useEffect(() => {
@@ -87,8 +91,6 @@ function Forecast({ location, onDaySelected }) {
     );
   };
 
-  return (
-    <>{hasErrored ? <div>Enter a location</div> : renderFiveDayForecast()}</>
-  );
+  return <>{hasErrored || renderFiveDayForecast()}</>;
 }
 export default Forecast;

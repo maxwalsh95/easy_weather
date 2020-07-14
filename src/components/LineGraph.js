@@ -1,10 +1,17 @@
 import React, { useEffect, useRef } from 'react';
+/** @jsxFrag React.Fragment */
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
 import Chart from 'chart.js';
 import PropTypes from 'prop-types';
 
 Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif";
 
 function LineGraph({ label, labels, data }) {
+  const lineGraph = css`
+    width: 100%;
+  `;
+
   const chartRef = useRef();
   useEffect(() => {
     const myChartRef = chartRef.current.getContext('2d');
@@ -25,15 +32,10 @@ function LineGraph({ label, labels, data }) {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: true,
       },
     });
   }, [data, labels, label]);
-  return (
-    <div>
-      <canvas id="myChart" ref={chartRef} />
-    </div>
-  );
+  return <canvas css={lineGraph} id="myChart" ref={chartRef} />;
 }
 
 LineGraph.propTypes = {

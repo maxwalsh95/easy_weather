@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { jsx, css } from '@emotion/core';
 import Forecast from './Forecast';
 import DaySummary from './DaySummary';
+import mq from '../utils/mq.style';
 
 export default function App() {
   const [location, setLocation] = useState('');
@@ -13,14 +14,20 @@ export default function App() {
 
   const forecastContainer = css`
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    ${mq[0]} {
+      width: 1000px;
+    }
+    display: grid;
+    grid-template-columns: 1fr;
+    // justify-items: center;
+    // margin: 10px;
   `;
 
   const searchBar = css`
-    width: 400px;
+    padding: 10px 15px;
+    font-size: 1.1rem;
+    width: 100%;
   `;
 
   useEffect(() => {
@@ -48,6 +55,7 @@ export default function App() {
         value={location}
         onChange={handleOnChange}
         onKeyPress={handleOnKeyPress}
+        placeholder="Enter a location..."
       />
       <Forecast location={searchedLocation} onDaySelected={handleDaySelected} />
       {selectedDayData.length > 0 && <DaySummary data={selectedDayData} />}
