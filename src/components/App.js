@@ -9,25 +9,38 @@ import mq from '../utils/mq.style';
 
 export default function App() {
   const [location, setLocation] = useState('');
-  const [searchedLocation, setSearchedLocation] = useState('gibraltar');
+  const [searchedLocation, setSearchedLocation] = useState('');
   const [selectedDayData, setSelectedDayData] = useState([]);
 
-  const forecastContainer = css`
-    height: 100%;
+  const easyWeatherContainer = css`
     width: 100%;
-    ${mq[0]} {
-      width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: white;
+    border-radius: 5px;
+
+    -webkit-box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
+    -moz-box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
+    box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
+
+    ${mq[2]} {
+      width: auto;
+      margin: 40px 0;
     }
-    display: grid;
-    grid-template-columns: 1fr;
-    // justify-items: center;
-    // margin: 10px;
   `;
 
   const searchBar = css`
+    margin: 10px 0;
     padding: 10px 15px;
     font-size: 1.1rem;
     width: 100%;
+    height: 50px;
+    ${mq[2]} {
+      width: 500px;
+    }
   `;
 
   useEffect(() => {
@@ -48,7 +61,7 @@ export default function App() {
   };
 
   return (
-    <div css={forecastContainer}>
+    <div css={easyWeatherContainer}>
       <input
         css={searchBar}
         type="text"

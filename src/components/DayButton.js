@@ -29,9 +29,9 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
     transition: background-position 0.3s;
     ${selected && 'background-position: right'};
 
-    -webkit-box-shadow: 0px 9px 28px -10px rgba(125, 123, 125, 1);
-    -moz-box-shadow: 0px 9px 28px -10px rgba(125, 123, 125, 1);
-    box-shadow: 0px 9px 28px -10px rgba(125, 123, 125, 1);
+    -webkit-box-shadow: 0px 10px 13px -10px rgb(108, 102, 108);
+    -moz-box-shadow: 0px 10px 13px -10px rgb(108, 102, 108);
+    box-shadow: 0px 10px 13px -10px rgb(108, 102, 108);
 
     &:hover {
       cursor: pointer;

@@ -4,13 +4,27 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: 'sans-serif';
+  background-color: #c5e9ff;
 }
 
 #root {
   height: 100%;
-  display: grid;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+@media (min-width: 500px) {
+  #root {
+    height: auto;
+  }
 }

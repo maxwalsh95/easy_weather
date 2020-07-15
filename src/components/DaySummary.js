@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
 /** @jsxFrag React.Fragment */
 /** @jsx jsx */
@@ -10,49 +9,57 @@ import fadeIn from '../utils/fadeIn.style';
 
 function DaySummary({ data }) {
   const daySummaryContainer = css`
-    width: 100%;
+    width: auto;
     ${fadeIn(1)}
-    overflow-x: auto;
+    transition: height 2s;
   `;
 
   const windAndClarityContainer = css`
     display: grid;
     grid-auto-flow: column;
+    grid-column-gap: 5px;
     overflow-x: auto;
-    padding: 10px 0;
+    padding: 10px 5px;
+    margin: 0 0 10px 0;
     ${fadeIn(1)}
   `;
 
   const li = css`
-    width: 100%;
+    width: 120px;
+    padding: 15px 0;
     display: inline-flex;
     flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
-    // margin: 0 10px;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+
+    &:nth-child(odd) {
+      background: #e1e0e0;
+      border-radius: 4px;
+    }
   `;
 
   const windContainer = css`
     display: flex;
-    // align-items: center;
-    // justify-content: space-between;
+    align-items: center;
+    justify-content: space-between;
   `;
 
   const windSpeed = css`
-    // margin-left: 10px;
+    margin-left: 10px;
   `;
 
   const readingSummaryContainer = css`
-    // display: flex;
+    display: flex;
   `;
 
   const readingSummary = css`
-    // font-size: 20px;
-    // margin: 0 0 0 10px;
+    font-size: 20px;
+    margin: 0 0 0 10px;
   `;
   const summaryLabel = css`
-    // font-weight: bold;
-    // margin: 0 5px 0 0;
+    font-weight: bold;
+    margin: 0 5px 0 0;
   `;
   const tempReadings = data.map((day) => day.temp);
 
@@ -74,7 +81,7 @@ function DaySummary({ data }) {
           <li css={li}>
             <div css={windContainer}>
               <Wind />
-              <span css={windSpeed}>{day.wind} m/s</span>
+              <span css={windSpeed}>{day.wind}m/s</span>
             </div>
             <img
               src={`http://openweathermap.org/img/wn/${day.icon}@2x.png`}

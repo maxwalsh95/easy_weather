@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import axios from 'axios';
+import CircleLoader from 'react-spinners/CircleLoader';
 import DayButton from './DayButton';
 import fadeIn from '../utils/fadeIn.style';
+import mq from '../utils/mq.style';
 
 function Forecast({ location, onDaySelected }) {
   const [forecast, setForecast] = useState([]);
@@ -15,11 +17,15 @@ function Forecast({ location, onDaySelected }) {
   const ul = css`
     padding: 0;
     width: 100%;
-    overflow: auto;
+    overflow-x: auto;
     display: grid;
     grid-auto-flow: column;
     grid-column-gap: 5px;
-    // justify-content: center;
+    margin: 0;
+    padding: 15px 0;
+    ${mq[0]} {
+      justify-content: center;
+    }
     ${fadeIn(1)}
   `;
 
@@ -68,7 +74,7 @@ function Forecast({ location, onDaySelected }) {
 
   const renderFiveDayForecast = () => {
     if (isLoading) {
-      return <div>Loading</div>;
+      return <CircleLoader color={'#c5e9ff'} />;
     }
 
     return (
