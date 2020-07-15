@@ -38,7 +38,7 @@ function Forecast({ location, onDaySelected }) {
       setIsLoading(true);
       try {
         const result = await axios(
-          `http://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=353885971018bbf455005e00b722d1e6`
+          `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=353885971018bbf455005e00b722d1e6`
         );
 
         setForecast(result.data.list);
