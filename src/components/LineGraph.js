@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-/** @jsxFrag React.Fragment */
+import { useEffect, useRef } from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import Chart from 'chart.js';

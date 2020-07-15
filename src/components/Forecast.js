@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-/** @jsxFrag React.Fragment */
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import axios from 'axios';
@@ -97,6 +96,8 @@ function Forecast({ location, onDaySelected }) {
     );
   };
 
-  return <>{hasErrored || renderFiveDayForecast()}</>;
+  return (
+    <React.Fragment>{hasErrored || renderFiveDayForecast()}</React.Fragment>
+  );
 }
 export default Forecast;

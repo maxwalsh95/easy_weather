@@ -1,6 +1,5 @@
-/** @jsxFrag React.Fragment */
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/core';
 
 const fadeIn = (duration) => {
   return css`

@@ -1,5 +1,3 @@
-import React from 'react';
-/** @jsxFrag React.Fragment */
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import { Wind } from 'react-feather';

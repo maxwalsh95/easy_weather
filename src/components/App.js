@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-/** @jsxFrag React.Fragment */
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import Forecast from './Forecast';
@@ -64,7 +63,7 @@ export default function App() {
   };
 
   return (
-    <>
+    <React.Fragment>
       <main css={easyWeatherContainer}>
         <input
           css={searchBar}
@@ -101,6 +100,6 @@ export default function App() {
           </a>
         </p>
       </footer>
-    </>
+    </React.Fragment>
   );
 }
