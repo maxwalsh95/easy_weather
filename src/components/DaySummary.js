@@ -87,7 +87,7 @@ function DaySummary({ data }) {
               <span css={windSpeed}>{day.wind}m/s</span>
             </div>
             <img
-              src={`http://openweathermap.org/img/wn/${day.icon}@2x.png`}
+              src={`https://openweathermap.org/img/wn/${day.icon}@2x.png`}
               alt=""
               width="50px"
               height="50px"
