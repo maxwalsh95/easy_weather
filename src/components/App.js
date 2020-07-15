@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 /** @jsxFrag React.Fragment */
 /** @jsx jsx */
@@ -6,6 +5,7 @@ import { jsx, css } from '@emotion/core';
 import Forecast from './Forecast';
 import DaySummary from './DaySummary';
 import mq from '../utils/mq.style';
+import fadeIn from '../utils/fadeIn.style';
 
 export default function App() {
   const [location, setLocation] = useState('');
@@ -14,13 +14,15 @@ export default function App() {
 
   const easyWeatherContainer = css`
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-items: center;
     align-items: center;
-    padding: 15px 30px;
+    padding: 5px;
     background-color: white;
     border-radius: 5px;
+    ${fadeIn(0.5)}
 
     -webkit-box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
     -moz-box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
@@ -29,6 +31,7 @@ export default function App() {
     ${mq[2]} {
       width: auto;
       margin: 40px 0;
+      padding: 15px 30px;
     }
   `;
 
@@ -61,17 +64,43 @@ export default function App() {
   };
 
   return (
-    <div css={easyWeatherContainer}>
-      <input
-        css={searchBar}
-        type="text"
-        value={location}
-        onChange={handleOnChange}
-        onKeyPress={handleOnKeyPress}
-        placeholder="Enter a location..."
-      />
-      <Forecast location={searchedLocation} onDaySelected={handleDaySelected} />
-      {selectedDayData.length > 0 && <DaySummary data={selectedDayData} />}
-    </div>
+    <>
+      <main css={easyWeatherContainer}>
+        <input
+          css={searchBar}
+          type="text"
+          value={location}
+          onChange={handleOnChange}
+          onKeyPress={handleOnKeyPress}
+          placeholder="Enter a location..."
+        />
+        <Forecast
+          location={searchedLocation}
+          onDaySelected={handleDaySelected}
+        />
+        {selectedDayData.length > 0 && <DaySummary data={selectedDayData} />}
+      </main>
+      <footer>
+        <p
+          css={css`
+            font-size: 1.2rem;
+            color: gray;
+          `}
+        >
+          made by&nbsp;
+          <a
+            href="https://github.com/maxwalsh95"
+            css={css`
+              border-bottom: thin dashed gray;
+              text-decoration: none;
+              color: gray;
+              ${fadeIn(0.5)}
+            `}
+          >
+            Max Walsh
+          </a>
+        </p>
+      </footer>
+    </>
   );
 }

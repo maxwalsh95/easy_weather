@@ -28,3 +28,7 @@ body {
     height: auto;
   }
 }
+
+a {
+  cursor: pointer;
+}

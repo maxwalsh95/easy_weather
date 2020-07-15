@@ -4,6 +4,7 @@ import React from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import PropTypes from 'prop-types';
+import fadeIn from '../utils/fadeIn.style';
 
 function DayButton({ selected, timestamp, icon, children, onSelected }) {
   const date = new Date(timestamp * 1000);
@@ -39,10 +40,15 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
     }
   `;
 
+  const clarityIcon = css`
+    ${fadeIn(0.5)}
+  `;
+
   return (
     <button css={button} type="button" onClick={() => onSelected(timestamp)}>
       <span>{day}</span>
       <img
+        css={clarityIcon}
         width="100px"
         height="100px"
         src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
@@ -55,7 +61,8 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
 
 DayButton.propTypes = {
   timestamp: PropTypes.number.isRequired,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
   icon: PropTypes.string.isRequired,
   onSelected: PropTypes.func.isRequired,
   selected: PropTypes.bool,

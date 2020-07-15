@@ -41,6 +41,8 @@ function LineGraph({ label, labels, data }) {
 LineGraph.propTypes = {
   label: PropTypes.string.isRequired,
   labels: PropTypes.arrayOf(PropTypes.string).isRequired,
-  data: PropTypes.arrayOf(PropTypes.string).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  ).isRequired,
 };
 export default LineGraph;

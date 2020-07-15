@@ -6,10 +6,14 @@ import { Wind } from 'react-feather';
 import PropTypes from 'prop-types';
 import LineGraph from './LineGraph';
 import fadeIn from '../utils/fadeIn.style';
+import mq from '../utils/mq.style';
 
 function DaySummary({ data }) {
   const daySummaryContainer = css`
-    width: auto;
+    width: 100%;
+    ${mq[2]} {
+      width: auto;
+    }
     ${fadeIn(1)}
     transition: height 2s;
   `;
@@ -33,7 +37,7 @@ function DaySummary({ data }) {
     justify-content: space-between;
     align-items: center;
 
-    &:nth-child(odd) {
+    &:nth-of-type(odd) {
       background: #e1e0e0;
       border-radius: 4px;
     }
@@ -47,6 +51,7 @@ function DaySummary({ data }) {
 
   const windSpeed = css`
     margin-left: 10px;
+    transform: translateY(2px);
   `;
 
   const readingSummaryContainer = css`
@@ -78,7 +83,7 @@ function DaySummary({ data }) {
     <div css={daySummaryContainer}>
       <ul css={windAndClarityContainer}>
         {data.map((day, index) => (
-          <li css={li}>
+          <li key={times[index]} css={li}>
             <div css={windContainer}>
               <Wind />
               <span css={windSpeed}>{day.wind}m/s</span>
@@ -109,7 +114,7 @@ function DaySummary({ data }) {
 }
 
 DaySummary.propTypes = {
-  data: PropTypes.objectOf(PropTypes.string).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default DaySummary;
