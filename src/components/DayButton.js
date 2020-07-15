@@ -51,7 +51,7 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
         css={clarityIcon}
         width="100px"
         height="100px"
-        src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+        src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
         alt=""
       />
       <span>{Math.round(children)}&deg;C</span>
