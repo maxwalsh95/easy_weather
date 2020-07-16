@@ -31,6 +31,9 @@ function LineGraph({ label, labels, data }) {
       },
       options: {
         responsive: true,
+        animation: {
+          duration: 0,
+        },
       },
     });
   }, [data, labels, label]);

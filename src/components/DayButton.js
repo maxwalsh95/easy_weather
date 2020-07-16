@@ -23,6 +23,7 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+    align-itemsjustify-content: center;
     padding: 15px 20px;
     font-size: 1.2rem;
     font-weight: bold;

@@ -9,11 +9,14 @@ import mq from '../utils/mq.style';
 function DaySummary({ data }) {
   const daySummaryContainer = css`
     width: 100%;
+    padding: 15px 17px;
+    ${fadeIn(1)}
+    background-color: white;
+    border-radius: 5px;
+
     ${mq[2]} {
       width: auto;
     }
-    ${fadeIn(1)}
-    transition: height 2s;
   `;
 
   const windAndClarityContainer = css`

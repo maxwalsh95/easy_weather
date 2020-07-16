@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
+import AnimateHeight from 'react-animate-height';
 import Forecast from './Forecast';
 import DaySummary from './DaySummary';
 import mq from '../utils/mq.style';
@@ -10,6 +11,7 @@ export default function App() {
   const [location, setLocation] = useState('');
   const [searchedLocation, setSearchedLocation] = useState('');
   const [selectedDayData, setSelectedDayData] = useState([]);
+  const [height, setHeight] = useState(0);
 
   const easyWeatherContainer = css`
     width: 100%;
@@ -19,13 +21,7 @@ export default function App() {
     justify-items: center;
     align-items: center;
     padding: 5px;
-    background-color: white;
-    border-radius: 5px;
     ${fadeIn(0.5)}
-
-    -webkit-box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
-    -moz-box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
-    box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
 
     ${mq[2]} {
       width: auto;
@@ -39,6 +35,10 @@ export default function App() {
     padding: 10px 15px;
     font-size: 1.1rem;
     width: 100%;
+    -webkit-box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
+    -moz-box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
+    box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
+
     height: 50px;
     ${mq[2]} {
       width: 500px;
@@ -60,6 +60,7 @@ export default function App() {
 
   const handleDaySelected = (data) => {
     setSelectedDayData(data);
+    setHeight('auto');
   };
 
   return (
@@ -77,7 +78,10 @@ export default function App() {
           location={searchedLocation}
           onDaySelected={handleDaySelected}
         />
-        {selectedDayData.length > 0 && <DaySummary data={selectedDayData} />}
+
+        <AnimateHeight duration={500} height={height}>
+          {selectedDayData.length > 0 && <DaySummary data={selectedDayData} />}
+        </AnimateHeight>
       </main>
       <footer>
         <p
