@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import Chart from 'chart.js';
@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif";
 
 function LineGraph({ label, labels, data }) {
+  const [chartLoaded, setChartLoaded] = useState(false);
   const lineGraph = css`
     width: 100%;
   `;
@@ -14,7 +15,7 @@ function LineGraph({ label, labels, data }) {
   const chartRef = useRef();
   useEffect(() => {
     const myChartRef = chartRef.current.getContext('2d');
-
+    const animate = chartLoaded ? 0 : 1000;
     // eslint-disable-next-line no-unused-vars
     const chart = new Chart(myChartRef, {
       type: 'line',
@@ -32,11 +33,13 @@ function LineGraph({ label, labels, data }) {
       options: {
         responsive: true,
         animation: {
-          duration: 0,
+          duration: animate,
         },
       },
     });
-  }, [data, labels, label]);
+
+    setChartLoaded(true);
+  }, [data, labels, label, chartLoaded]);
   return <canvas css={lineGraph} id="myChart" ref={chartRef} />;
 }
 

@@ -4,14 +4,15 @@ import { jsx, css } from '@emotion/core';
 import AnimateHeight from 'react-animate-height';
 import Forecast from './Forecast';
 import DaySummary from './DaySummary';
-import mq from '../utils/mq.style';
-import fadeIn from '../utils/fadeIn.style';
+import mq from '../styles/mq';
+import fadeIn from '../styles/fadeIn';
 
 export default function App() {
   const [location, setLocation] = useState('');
   const [searchedLocation, setSearchedLocation] = useState('');
   const [selectedDayData, setSelectedDayData] = useState([]);
   const [height, setHeight] = useState(0);
+  const [heightAnimationDuration, setHeightAnimationDuration] = useState(500);
 
   const easyWeatherContainer = css`
     width: 100%;
@@ -20,6 +21,7 @@ export default function App() {
     flex-direction: column;
     justify-items: center;
     align-items: center;
+    flex-grow: 1;
     padding: 5px;
     ${fadeIn(0.5)}
 
@@ -35,6 +37,7 @@ export default function App() {
     padding: 10px 15px;
     font-size: 1.1rem;
     width: 100%;
+
     -webkit-box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
     -moz-box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
     box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
@@ -56,11 +59,14 @@ export default function App() {
   const handleOnKeyPress = (event) => {
     if (event.key !== 'Enter') return;
     setSearchedLocation(event.target.value);
+    setHeight(0);
+    setHeightAnimationDuration(0);
   };
 
   const handleDaySelected = (data) => {
     setSelectedDayData(data);
     setHeight('auto');
+    setHeightAnimationDuration(500);
   };
 
   return (
@@ -79,11 +85,19 @@ export default function App() {
           onDaySelected={handleDaySelected}
         />
 
-        <AnimateHeight duration={500} height={height}>
+        <AnimateHeight
+          duration={heightAnimationDuration}
+          style={{ width: '100%' }}
+          height={height}
+        >
           {selectedDayData.length > 0 && <DaySummary data={selectedDayData} />}
         </AnimateHeight>
       </main>
-      <footer>
+      <footer
+        css={css`
+          justify-self: flex-end;
+        `}
+      >
         <p
           css={css`
             font-size: 1.2rem;

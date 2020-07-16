@@ -1,10 +1,8 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
-/** @jsxFrag React.Fragment */
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import PropTypes from 'prop-types';
-import fadeIn from '../utils/fadeIn.style';
+import fadeIn from '../styles/fadeIn';
+import { blueGradient, orangeGradient } from '../styles/constants';
 
 function DayButton({ selected, timestamp, icon, children, onSelected }) {
   const date = new Date(timestamp * 1000);
@@ -12,25 +10,21 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
     weekday: 'short',
   }).format(date);
 
-  const bgGradient = selected
-    ? 'linear-gradient(43deg, rgba(230,174,125,1) 0%, rgba(221,122,34,1) 51%, rgba(232,194,7,1) 82%, rgba(226,221,152,1) 99%)'
-    : 'linear-gradient(      34deg,      rgba(124, 135, 185, 1) 0%,      rgba(97, 97, 247, 1) 51%,      rgba(7, 181, 232, 1) 82%,      rgba(0, 212, 255, 1) 99%    );';
-
   const button = css`
-    // background: rgb(124, 135, 185);
     height: 185px;
-    background: ${bgGradient};
-    border: none;
-    border-radius: 5px;
+    padding: 15px 20px;
     display: flex;
     flex-direction: column;
     align-itemsjustify-content: center;
-    padding: 15px 20px;
+
+    border: none;
+    border-radius: 5px;
     font-size: 1.2rem;
     font-weight: bold;
     background-size: 300%;
-    transition: background-position 0.3s;
+    background: ${selected ? orangeGradient : blueGradient};
     ${selected && 'background-position: right'};
+    transition: background-position 0.3s;
 
     -webkit-box-shadow: 0px 10px 13px -10px rgb(108, 102, 108);
     -moz-box-shadow: 0px 10px 13px -10px rgb(108, 102, 108);
@@ -43,7 +37,7 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
   `;
 
   const clarityIcon = css`
-    ${fadeIn(1)}
+    ${fadeIn(0.5)}
   `;
 
   return (
@@ -62,7 +56,7 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
 }
 
 DayButton.propTypes = {
-  timestamp: PropTypes.number,
+  timestamp: PropTypes.oneOfType()(PropTypes.number),
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   icon: PropTypes.string,
   onSelected: PropTypes.func,
@@ -74,7 +68,7 @@ DayButton.defaultProps = {
   timestamp: null,
   icon: '',
   children: null,
-  onSelected: null,
+  onSelected: false,
 };
 
 export default DayButton;

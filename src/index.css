@@ -26,6 +26,7 @@ body {
 @media (min-width: 500px) {
   #root {
     height: auto;
+    min-height: 100%;
   }
 }
 

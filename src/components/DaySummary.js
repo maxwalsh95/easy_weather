@@ -3,19 +3,21 @@ import { jsx, css } from '@emotion/core';
 import { Wind } from 'react-feather';
 import PropTypes from 'prop-types';
 import LineGraph from './LineGraph';
-import fadeIn from '../utils/fadeIn.style';
-import mq from '../utils/mq.style';
+import fadeIn from '../styles/fadeIn';
+import mq from '../styles/mq';
 
 function DaySummary({ data }) {
   const daySummaryContainer = css`
     width: 100%;
-    padding: 15px 17px;
+    padding: 2px;
+    flex-grow: 1;
     ${fadeIn(1)}
     background-color: white;
     border-radius: 5px;
 
     ${mq[2]} {
       width: auto;
+      padding: 15px 17px;
     }
   `;
 

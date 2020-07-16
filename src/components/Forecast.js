@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
+import PropTypes from 'prop-types';
 import axios from 'axios';
+import BarLoader from 'react-spinners/BarLoader';
 import DayButton from './DayButton';
-import fadeIn from '../utils/fadeIn.style';
-import mq from '../utils/mq.style';
+import fadeIn from '../styles/fadeIn';
+import mq from '../styles/mq';
 
 function Forecast({ location, onDaySelected }) {
   const [forecast, setForecast] = useState([]);
@@ -27,14 +29,21 @@ function Forecast({ location, onDaySelected }) {
     ${fadeIn(1)}
   `;
 
-  const li = () => css`
+  const li = css`
     display: inline-block;
+  `;
+
+  const loaderContainer = css`
+    height: 150px;
+    display: flex;
+    align-items: center;
   `;
 
   useEffect(() => {
     setSelectedDay(null);
     const getForecast = async () => {
       setIsLoading(true);
+      const timeout = setTimeout(() => setHasErrored(true), 2000);
       try {
         const result = await axios(
           `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=353885971018bbf455005e00b722d1e6`
@@ -44,6 +53,7 @@ function Forecast({ location, onDaySelected }) {
 
         setIsLoading(false);
         setHasErrored(false);
+        clearTimeout(timeout);
       } catch (e) {
         setHasErrored(true);
       }
@@ -71,28 +81,13 @@ function Forecast({ location, onDaySelected }) {
   };
 
   const renderFiveDayForecast = () => {
-    if (isLoading) {
+    if (isLoading)
       return (
-        <ul css={ul}>
-          <li css={li}>
-            <DayButton />
-          </li>
-          <li css={li}>
-            <DayButton />
-          </li>
-          <li css={li}>
-            <DayButton />
-          </li>
-          <li css={li}>
-            <DayButton />
-          </li>
-          <li css={li}>
-            <DayButton />
-          </li>
-        </ul>
+        <div css={loaderContainer}>
+          <BarLoader color={'blue'} />
+        </div>
       );
-    }
-
+    if (hasErrored) return <div>Something went wrong</div>;
     return (
       <ul css={ul}>
         {forecast
@@ -113,8 +108,16 @@ function Forecast({ location, onDaySelected }) {
     );
   };
 
-  return (
-    <React.Fragment>{hasErrored || renderFiveDayForecast()}</React.Fragment>
-  );
+  return <React.Fragment>{location && renderFiveDayForecast()}</React.Fragment>;
 }
+
+Forecast.propTypes = {
+  location: PropTypes.string,
+  onDaySelected: PropTypes.func,
+};
+
+Forecast.defaultProps = {
+  location: '',
+  onDaySelected: null,
+};
 export default Forecast;
