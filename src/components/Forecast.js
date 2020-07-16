@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import axios from 'axios';
-import CircleLoader from 'react-spinners/CircleLoader';
 import DayButton from './DayButton';
 import fadeIn from '../utils/fadeIn.style';
 import mq from '../utils/mq.style';
