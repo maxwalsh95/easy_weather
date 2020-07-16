@@ -18,6 +18,7 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
 
   const button = css`
     // background: rgb(124, 135, 185);
+    height: 185px;
     background: ${bgGradient};
     border: none;
     border-radius: 5px;
@@ -42,12 +43,12 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
   `;
 
   const clarityIcon = css`
-    ${fadeIn(0.5)}
+    ${fadeIn(1)}
   `;
 
   return (
     <button css={button} type="button" onClick={() => onSelected(timestamp)}>
-      <span>{day}</span>
+      <span>{timestamp && day}</span>
       <img
         css={clarityIcon}
         width="100px"
@@ -55,22 +56,25 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
         src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
         alt=""
       />
-      <span>{Math.round(children)}&deg;C</span>
+      {children && <span>{Math.round(children)}&deg;C</span>}
     </button>
   );
 }
 
 DayButton.propTypes = {
-  timestamp: PropTypes.number.isRequired,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    .isRequired,
-  icon: PropTypes.string.isRequired,
-  onSelected: PropTypes.func.isRequired,
+  timestamp: PropTypes.number,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  icon: PropTypes.string,
+  onSelected: PropTypes.func,
   selected: PropTypes.bool,
 };
 
 DayButton.defaultProps = {
   selected: false,
+  timestamp: null,
+  icon: '',
+  children: null,
+  onSelected: null,
 };
 
 export default DayButton;

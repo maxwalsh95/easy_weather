@@ -73,7 +73,25 @@ function Forecast({ location, onDaySelected }) {
 
   const renderFiveDayForecast = () => {
     if (isLoading) {
-      return <CircleLoader color="#c5e9ff" />;
+      return (
+        <ul css={ul}>
+          <li css={li}>
+            <DayButton />
+          </li>
+          <li css={li}>
+            <DayButton />
+          </li>
+          <li css={li}>
+            <DayButton />
+          </li>
+          <li css={li}>
+            <DayButton />
+          </li>
+          <li css={li}>
+            <DayButton />
+          </li>
+        </ul>
+      );
     }
 
     return (
