@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import AnimateHeight from 'react-animate-height';
-import Autocomplete from 'react-autocomplete';
+// import Autocomplete from 'react-autocomplete';
 import Forecast from './Forecast';
 import DaySummary from './DaySummary';
 import mq from '../styles/mq';
 import fadeIn from '../styles/fadeIn';
 import { lightGray } from '../styles/constants';
-import cities from '../services/city.list.json';
+// import cities from '../services/city.list.json';
 
 export default function App() {
   const [location, setLocation] = useState('');
@@ -17,7 +17,7 @@ export default function App() {
   const [height, setHeight] = useState(0);
   const [heightAnimationDuration, setHeightAnimationDuration] = useState(500);
 
-  const showAutocomplete = location.length > 2 ? true : false;
+  // const showAutocomplete = location.length > 2 ? true : false;
 
   const easyWeatherContainer = css`
     width: 100%;
