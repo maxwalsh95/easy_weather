@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import LineGraph from './LineGraph';
 import fadeIn from '../styles/fadeIn';
 import mq from '../styles/mq';
+import { lightGray } from '../styles/constants';
 
 function DaySummary({ data }) {
   const daySummaryContainer = css`
@@ -13,7 +14,12 @@ function DaySummary({ data }) {
     flex-grow: 1;
     ${fadeIn(1)}
     background-color: white;
+    border: 1px solid ${lightGray};
     border-radius: 5px;
+
+    -webkit-box-shadow: 0px 4px 0px 0px rgba(208, 205, 205, 1);
+    -moz-box-shadow: 0px 4px 0px 0px rgba(208, 205, 205, 1);
+    box-shadow: 0px 4px 0px 0px rgba(208, 205, 205, 1);
 
     ${mq[2]} {
       width: auto;
@@ -54,7 +60,7 @@ function DaySummary({ data }) {
 
   const windSpeed = css`
     margin-left: 10px;
-    transform: translateY(2px);
+    transform: translateY(-1px);
   `;
 
   const readingSummaryContainer = css`
@@ -69,6 +75,7 @@ function DaySummary({ data }) {
     font-weight: bold;
     margin: 0 5px 0 0;
   `;
+
   const tempReadings = data.map((day) => day.temp);
 
   const times = data.map((day) => {

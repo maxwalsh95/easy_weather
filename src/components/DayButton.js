@@ -21,10 +21,10 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
     border-radius: 5px;
     font-size: 1.2rem;
     font-weight: bold;
-    background-size: 300%;
     background: ${selected ? orangeGradient : blueGradient};
     ${selected && 'background-position: right'};
     transition: background-position 0.3s;
+    background-size: 300%;
 
     -webkit-box-shadow: 0px 10px 13px -10px rgb(108, 102, 108);
     -moz-box-shadow: 0px 10px 13px -10px rgb(108, 102, 108);

@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import AnimateHeight from 'react-animate-height';
+import Autocomplete from 'react-autocomplete';
 import Forecast from './Forecast';
 import DaySummary from './DaySummary';
 import mq from '../styles/mq';
 import fadeIn from '../styles/fadeIn';
+import { lightGray } from '../styles/constants';
+import cities from '../services/city.list.json';
 
 export default function App() {
   const [location, setLocation] = useState('');
@@ -13,6 +16,8 @@ export default function App() {
   const [selectedDayData, setSelectedDayData] = useState([]);
   const [height, setHeight] = useState(0);
   const [heightAnimationDuration, setHeightAnimationDuration] = useState(500);
+
+  const showAutocomplete = location.length > 2 ? true : false;
 
   const easyWeatherContainer = css`
     width: 100%;
@@ -38,13 +43,19 @@ export default function App() {
     font-size: 1.1rem;
     width: 100%;
 
-    -webkit-box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
-    -moz-box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
-    box-shadow: 0px 10px 26px 0px rgba(104, 104, 104, 0.27);
+    font-family: 'Montserrat', sans-serif;
+    border: 2px solid ${lightGray};
+    border-radius: 4px;
 
     height: 50px;
     ${mq[2]} {
       width: 500px;
+    }
+
+    &:focus {
+      -webkit-box-shadow: 0px 0px 5px 1px rgb(240, 161, 1);
+      -moz-box-shadow: 0px 0px 5px 1px rgb(240, 161, 1);
+      box-shadow: 0px 0px 5px 1px rgb(240, 161, 1);
     }
   `;
 
@@ -72,6 +83,36 @@ export default function App() {
   return (
     <React.Fragment>
       <main css={easyWeatherContainer}>
+        {/*
+            TODO: finish autocompletion
+            <Autocomplete
+              getItemValue={(item) => item.name}
+              items={cities}
+              renderItem={(item, isHighlighted) => (
+                <div
+                  style={{
+                    padding: '5px',
+                    background: isHighlighted ? 'lightgray' : 'white',
+                  }}
+                >
+                    {item.name}
+                  </div>
+              )}
+                    value={location}
+                    onChange={handleOnChange}
+                    open={showAutocomplete}
+                    shouldItemRender={(item) =>
+                        item.name.toLowerCase().includes(location.toLowerCase())
+                    }
+                    onSelect={(val) => setLocation(val)}
+                    menuStyle={{
+                      maxHeight: 'auto',
+                      borderBottomLeftRadius: '5px',
+                      borderBottomRightRadius: '5px',
+                    }}
+                    selectOnBlur
+                  />
+            */}
         <input
           css={searchBar}
           type="text"
