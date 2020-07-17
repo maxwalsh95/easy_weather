@@ -56,6 +56,7 @@ export default function App() {
       -webkit-box-shadow: 0px 0px 5px 1px rgb(240, 161, 1);
       -moz-box-shadow: 0px 0px 5px 1px rgb(240, 161, 1);
       box-shadow: 0px 0px 5px 1px rgb(240, 161, 1);
+      outline-color: orange;
     }
   `;
 

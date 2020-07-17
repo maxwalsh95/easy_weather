@@ -15,7 +15,8 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
     padding: 15px 20px;
     display: flex;
     flex-direction: column;
-    align-itemsjustify-content: center;
+    justify-content: center;
+    align-items: center;
 
     border: none;
     border-radius: 5px;
@@ -32,6 +33,11 @@ function DayButton({ selected, timestamp, icon, children, onSelected }) {
 
     &:hover {
       cursor: pointer;
+      ${selected || 'background-position: right'};
+    }
+
+    &:focus {
+      outline-color: orange;
       ${selected || 'background-position: right'};
     }
   `;
